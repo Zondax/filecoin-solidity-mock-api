@@ -1,6 +1,6 @@
 ---
 title: How to deploy smart contracts?
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 ## Tools 
