@@ -1,0 +1,7 @@
+.idea
+**/*.bin
+**/*.signatures
+**/*.opcode
+**/bin/*
+!**/bin/.gitkeep
+**/target/
