@@ -3,7 +3,7 @@ title: "Specifications"
 sidebar_position: 2
 ---
 
-## Actors and methods support
+## Actors and methods supported
 
 | Actor/method                             | Supported?               |
 |:-----------------------------------------|:-------------------------|
