@@ -11,6 +11,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies
-        run: cd m3 && make install_solc_linux
+        run: make install_solc_linux
       - name: Compile contract file
-        run: cd m3 && make
+        run: make
