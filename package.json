@@ -1,0 +1,30 @@
+{
+  "name": "@zondax/fevm-solidity-mock-api",
+  "version": "0.0.0",
+  "description": "Filecoin EVM Solidity Mock APIs",
+  "main": "",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zondax/fevm-solidity-mock-api.git"
+  },
+  "keywords": [
+    "FEVM",
+    "EVM",
+    "Solidity",
+    "Filecoin"
+  ],
+  "author": "Zondax AG <hello@zondax.ch>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Zondax/fevm-solidity-mock-api/issues"
+  },
+  "homepage": "https://github.com/Zondax/fevm-solidity-mock-api#readme",
+  "files": [
+    "contracts"
+  ]
+}
