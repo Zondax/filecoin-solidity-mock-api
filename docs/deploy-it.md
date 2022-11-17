@@ -32,7 +32,7 @@ After a few seconds, you will end up on the following page. Please, click on "Ad
 Now it is time to fill each text box with the corresponding value. Once you finish typing in the values, hit "Save".
 
 - Name: Filecoin Wallaby
-- RPC URL: https://api.zondax.ch/fil/node/wallaby/rpc/v0
+- RPC URL: https://api.zondax.ch/fil/node/wallaby/rpc
 - ChainID: 31415 (Wallaby's ID)
 - Currency symbol: TFIL (Test FIL).
 
