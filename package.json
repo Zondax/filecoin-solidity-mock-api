@@ -1,5 +1,5 @@
 {
-  "name": "@zondax/fevm-solidity-mock-api",
+  "name": "@zondax/filecoin-solidity-mock-api",
   "version": "0.0.0",
   "description": "Filecoin EVM Solidity Mock APIs",
   "main": "",
@@ -26,5 +26,8 @@
   "homepage": "https://github.com/Zondax/fevm-solidity-mock-api#readme",
   "files": [
     "contracts"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
