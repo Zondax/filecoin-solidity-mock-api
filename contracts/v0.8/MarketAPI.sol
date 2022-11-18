@@ -20,6 +20,8 @@ contract MarketAPI{
         if(balances[params.provider_or_client] >= params.tokenAmount){
             balances[params.provider_or_client] -= params.tokenAmount;
             tmp = params.tokenAmount;
+        } else {
+            balances[params.provider_or_client] = 0;
         }
 
         return MarketTypes.WithdrawBalanceReturn(tmp);
