@@ -15,8 +15,14 @@ contract MarketAPI{
         balances[params.provider_or_client] += msg.value;
     }
 
-    function withdraw_balance(MarketTypes.WithdrawBalanceParams memory params) public pure returns (MarketTypes.WithdrawBalanceReturn memory) {
-        return MarketTypes.WithdrawBalanceReturn(1);
+    function withdraw_balance(MarketTypes.WithdrawBalanceParams memory params) public returns (MarketTypes.WithdrawBalanceReturn memory) {
+        uint256 tmp = balances[params.provider_or_client];
+        if(balances[params.provider_or_client] >= params.tokenAmount){
+            balances[params.provider_or_client] -= params.tokenAmount;
+            tmp = params.tokenAmount;
+        }
+
+        return MarketTypes.WithdrawBalanceReturn(tmp);
     }
 
     function get_balance(string memory addr) public view returns (MarketTypes.GetBalanceReturn memory) {

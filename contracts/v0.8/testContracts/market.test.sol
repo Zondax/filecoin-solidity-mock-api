@@ -12,7 +12,7 @@ contract FilecoinMarketMockTest {
         marketApiAddress = _marketApiAddress;
     }
 
-    function market_withdraw_balance_test() public view returns (MarketTypes.WithdrawBalanceReturn memory){
+    function market_withdraw_balance_test() public returns (MarketTypes.WithdrawBalanceReturn memory){
         MarketAPI marketApiInstance = MarketAPI(marketApiAddress);
 
         string memory addr = "t01113";
