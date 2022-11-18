@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity >=0.4.25 <= 0.8.15;
+pragma solidity >=0.4.25 <=0.8.15;
 
 /// @title Filecoin market actor types for Solidity.
 /// @author Zondax AG
-library MarketTypes{
-    struct MockDeal{
+library MarketTypes {
+    struct MockDeal {
         uint64 id;
         string cid;
         uint64 size;

@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity >=0.4.25 <= 0.8.15;
+pragma solidity >=0.4.25 <=0.8.15;
 
 import "./CommonTypes.sol";
 
 /// @title Filecoin miner actor types for Solidity.
 /// @author Zondax AG
-library MinerTypes{
+library MinerTypes {
     struct GetOwnerReturn {
         string owner;
     }

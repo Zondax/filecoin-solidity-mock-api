@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity >=0.4.25 <= 0.8.15;
+pragma solidity >=0.4.25 <=0.8.15;
 
 import "./typeLibraries/MarketTypes.sol";
 
@@ -7,24 +7,27 @@ import "./typeLibraries/MarketTypes.sol";
 /// @author Zondax AG
 /// @notice It is mock with specific scenarios based on the parameters used to call its methods. It is meant to serve as the first entry point, and be replaced seamlessly in the future by the real API implementation tath actually calls the filecoin actor.
 /// @dev Most of function calls are currently implemented using some kind of struct for parameters and returns.
-contract MarketAPI{
+contract MarketAPI {
     mapping(string => uint256) balances;
     mapping(uint64 => MarketTypes.MockDeal) deals;
 
-    constructor(){
+    constructor() {
         generate_deal_mocks();
     }
 
-
     /// @param params MarketTypes.AddBalanceParams
-    function add_balance(MarketTypes.AddBalanceParams memory params) public payable {
+    function add_balance(
+        MarketTypes.AddBalanceParams memory params
+    ) public payable {
         balances[params.provider_or_client] += msg.value;
     }
 
     /// @param params MarketTypes.WithdrawBalanceParams
-    function withdraw_balance(MarketTypes.WithdrawBalanceParams memory params) public returns (MarketTypes.WithdrawBalanceReturn memory) {
+    function withdraw_balance(
+        MarketTypes.WithdrawBalanceParams memory params
+    ) public returns (MarketTypes.WithdrawBalanceReturn memory) {
         uint256 tmp = balances[params.provider_or_client];
-        if(balances[params.provider_or_client] >= params.tokenAmount){
+        if (balances[params.provider_or_client] >= params.tokenAmount) {
             balances[params.provider_or_client] -= params.tokenAmount;
             tmp = params.tokenAmount;
         } else {
@@ -35,7 +38,9 @@ contract MarketAPI{
     }
 
     /// @param addr string
-    function get_balance(string memory addr) public view returns (MarketTypes.GetBalanceReturn memory) {
+    function get_balance(
+        string memory addr
+    ) public view returns (MarketTypes.GetBalanceReturn memory) {
         uint256 actualBalance = balances[addr];
 
         return MarketTypes.GetBalanceReturn(actualBalance, 0);
@@ -43,86 +48,134 @@ contract MarketAPI{
 
     // FIXME set data values correctly
     /// @param params MarketTypes.GetDealDataCommitmentParams
-    function get_deal_data_commitment(MarketTypes.GetDealDataCommitmentParams memory params) public view returns (MarketTypes.GetDealDataCommitmentReturn memory) {
+    function get_deal_data_commitment(
+        MarketTypes.GetDealDataCommitmentParams memory params
+    ) public view returns (MarketTypes.GetDealDataCommitmentReturn memory) {
         require(deals[params.id].id > 0);
 
-        return MarketTypes.GetDealDataCommitmentReturn(bytes("0x111111"), deals[params.id].size);
+        return
+            MarketTypes.GetDealDataCommitmentReturn(
+                bytes("0x111111"),
+                deals[params.id].size
+            );
     }
 
     /// @param params MarketTypes.GetDealClientParams
-    function get_deal_client(MarketTypes.GetDealClientParams memory params) public view returns (MarketTypes.GetDealClientReturn memory) {
+    function get_deal_client(
+        MarketTypes.GetDealClientParams memory params
+    ) public view returns (MarketTypes.GetDealClientReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealClientReturn(deals[params.id].client);
     }
 
     /// @param params MarketTypes.GetDealProviderParams
-    function get_deal_provider(MarketTypes.GetDealProviderParams memory params) public view returns (MarketTypes.GetDealProviderReturn memory) {
+    function get_deal_provider(
+        MarketTypes.GetDealProviderParams memory params
+    ) public view returns (MarketTypes.GetDealProviderReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealProviderReturn(deals[params.id].provider);
     }
 
     /// @param params MarketTypes.GetDealLabelParams
-    function get_deal_label(MarketTypes.GetDealLabelParams memory params) public view returns (MarketTypes.GetDealLabelReturn memory) {
+    function get_deal_label(
+        MarketTypes.GetDealLabelParams memory params
+    ) public view returns (MarketTypes.GetDealLabelReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealLabelReturn(deals[params.id].label);
     }
 
     /// @param params MarketTypes.GetDealTermParams
-    function get_deal_term(MarketTypes.GetDealTermParams memory params) public view returns (MarketTypes.GetDealTermReturn memory) {
+    function get_deal_term(
+        MarketTypes.GetDealTermParams memory params
+    ) public view returns (MarketTypes.GetDealTermReturn memory) {
         require(deals[params.id].id > 0);
 
-        return MarketTypes.GetDealTermReturn(deals[params.id].start, deals[params.id].end);
+        return
+            MarketTypes.GetDealTermReturn(
+                deals[params.id].start,
+                deals[params.id].end
+            );
     }
 
     /// @param params MarketTypes.GetDealEpochPriceParams
-    function get_deal_epoch_price(MarketTypes.GetDealEpochPriceParams memory params) public view returns (MarketTypes.GetDealEpochPriceReturn memory) {
+    function get_deal_epoch_price(
+        MarketTypes.GetDealEpochPriceParams memory params
+    ) public view returns (MarketTypes.GetDealEpochPriceReturn memory) {
         require(deals[params.id].id > 0);
 
-        return MarketTypes.GetDealEpochPriceReturn(deals[params.id].price_per_epoch);
+        return
+            MarketTypes.GetDealEpochPriceReturn(
+                deals[params.id].price_per_epoch
+            );
     }
 
     /// @param params MarketTypes.GetDealClientCollateralParams
-    function get_deal_client_collateral(MarketTypes.GetDealClientCollateralParams memory params) public view returns (MarketTypes.GetDealClientCollateralReturn memory) {
+    function get_deal_client_collateral(
+        MarketTypes.GetDealClientCollateralParams memory params
+    ) public view returns (MarketTypes.GetDealClientCollateralReturn memory) {
         require(deals[params.id].id > 0);
 
-        return MarketTypes.GetDealClientCollateralReturn(deals[params.id].client_collateral);
+        return
+            MarketTypes.GetDealClientCollateralReturn(
+                deals[params.id].client_collateral
+            );
     }
 
     /// @param params MarketTypes.GetDealProviderCollateralParams
-    function get_deal_provider_collateral(MarketTypes.GetDealProviderCollateralParams memory params) public view returns (MarketTypes.GetDealProviderCollateralReturn memory) {
+    function get_deal_provider_collateral(
+        MarketTypes.GetDealProviderCollateralParams memory params
+    ) public view returns (MarketTypes.GetDealProviderCollateralReturn memory) {
         require(deals[params.id].id > 0);
 
-        return MarketTypes.GetDealProviderCollateralReturn(deals[params.id].provider_collateral);
+        return
+            MarketTypes.GetDealProviderCollateralReturn(
+                deals[params.id].provider_collateral
+            );
     }
 
     /// @param params MarketTypes.GetDealVerifiedParams
-    function get_deal_verified(MarketTypes.GetDealVerifiedParams memory params) public view returns (MarketTypes.GetDealVerifiedReturn memory) {
+    function get_deal_verified(
+        MarketTypes.GetDealVerifiedParams memory params
+    ) public view returns (MarketTypes.GetDealVerifiedReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealVerifiedReturn(deals[params.id].verified);
     }
 
     /// @param params MarketTypes.GetDealActivationParams
-    function get_deal_activation(MarketTypes.GetDealActivationParams memory params) public view returns (MarketTypes.GetDealActivationReturn memory) {
+    function get_deal_activation(
+        MarketTypes.GetDealActivationParams memory params
+    ) public view returns (MarketTypes.GetDealActivationReturn memory) {
         require(deals[params.id].id > 0);
 
-        return MarketTypes.GetDealActivationReturn(deals[params.id].activated, deals[params.id].terminated);
+        return
+            MarketTypes.GetDealActivationReturn(
+                deals[params.id].activated,
+                deals[params.id].terminated
+            );
     }
 
     function publish_deal(bytes memory raw_auth_params, address callee) public {
         // calls standard filecoin receiver on message authentication api method number
-        (bool success, ) = callee.call(abi.encodeWithSignature("handle_filecoin_method(uint64,uint64,bytes)", 0, 2643134072, raw_auth_params));
+        (bool success, ) = callee.call(
+            abi.encodeWithSignature(
+                "handle_filecoin_method(uint64,uint64,bytes)",
+                0,
+                2643134072,
+                raw_auth_params
+            )
+        );
         require(success, "client contract failed to authorize deal publish");
     }
 
     function generate_deal_mocks() internal {
-
         MarketTypes.MockDeal memory deal_67;
         deal_67.id = 67;
-        deal_67.cid ="baga6ea4seaqlkg6mss5qs56jqtajg5ycrhpkj2b66cgdkukf2qjmmzz6ayksuci";
+        deal_67
+            .cid = "baga6ea4seaqlkg6mss5qs56jqtajg5ycrhpkj2b66cgdkukf2qjmmzz6ayksuci";
         deal_67.size = 8388608;
         deal_67.verified = false;
         deal_67.client = "t01109";
@@ -138,10 +191,10 @@ contract MarketAPI{
 
         deals[deal_67.id] = deal_67;
 
-
         MarketTypes.MockDeal memory deal_68;
         deal_68.id = 68;
-        deal_68.cid ="baga6ea4seaqiun7s6npsi23ujt55qclad2rkxy44hx5thrmllgdl5pbcv32gsky";
+        deal_68
+            .cid = "baga6ea4seaqiun7s6npsi23ujt55qclad2rkxy44hx5thrmllgdl5pbcv32gsky";
         deal_68.size = 4194304;
         deal_68.verified = false;
         deal_68.client = "t01109";
@@ -157,10 +210,10 @@ contract MarketAPI{
 
         deals[deal_68.id] = deal_68;
 
-
         MarketTypes.MockDeal memory deal_69;
         deal_69.id = 69;
-        deal_69.cid ="baga6ea4seaqftmfuagbtycvrcskaol64eyio3dnzpjbllpwvwkv2nd5lqdiymby";
+        deal_69
+            .cid = "baga6ea4seaqftmfuagbtycvrcskaol64eyio3dnzpjbllpwvwkv2nd5lqdiymby";
         deal_69.size = 8388608;
         deal_69.verified = false;
         deal_69.client = "t01109";
@@ -176,10 +229,10 @@ contract MarketAPI{
 
         deals[deal_69.id] = deal_69;
 
-
         MarketTypes.MockDeal memory deal_70;
         deal_70.id = 70;
-        deal_70.cid ="baga6ea4seaqastxji7jl5lgnnkcrqrmacaghmxjsgif6dose77ggmn2dkwpnqoq";
+        deal_70
+            .cid = "baga6ea4seaqastxji7jl5lgnnkcrqrmacaghmxjsgif6dose77ggmn2dkwpnqoq";
         deal_70.size = 8388608;
         deal_70.verified = false;
         deal_70.client = "t01109";
@@ -195,10 +248,10 @@ contract MarketAPI{
 
         deals[deal_70.id] = deal_70;
 
-
         MarketTypes.MockDeal memory deal_71;
         deal_71.id = 71;
-        deal_71.cid ="baga6ea4seaqn7y7fwlhlshrysd2j443pyi6knof2c5qp533co2mqj5rzbq7t2pi";
+        deal_71
+            .cid = "baga6ea4seaqn7y7fwlhlshrysd2j443pyi6knof2c5qp533co2mqj5rzbq7t2pi";
         deal_71.size = 8388608;
         deal_71.verified = false;
         deal_71.client = "t01109";
@@ -214,10 +267,10 @@ contract MarketAPI{
 
         deals[deal_71.id] = deal_71;
 
-
         MarketTypes.MockDeal memory deal_72;
         deal_72.id = 72;
-        deal_72.cid ="baga6ea4seaqdl6geodjdraqwh56yqewcub4pxnlxsc7673xnfazhctawun22aha";
+        deal_72
+            .cid = "baga6ea4seaqdl6geodjdraqwh56yqewcub4pxnlxsc7673xnfazhctawun22aha";
         deal_72.size = 4194304;
         deal_72.verified = false;
         deal_72.client = "t01109";
@@ -233,10 +286,10 @@ contract MarketAPI{
 
         deals[deal_72.id] = deal_72;
 
-
         MarketTypes.MockDeal memory deal_73;
         deal_73.id = 73;
-        deal_73.cid ="baga6ea4seaqcxlx2n7wvk45vl5eqrocvfnpkxbdnsi3bv3u5lwowxjirlgt7wgy";
+        deal_73
+            .cid = "baga6ea4seaqcxlx2n7wvk45vl5eqrocvfnpkxbdnsi3bv3u5lwowxjirlgt7wgy";
         deal_73.size = 4194304;
         deal_73.verified = false;
         deal_73.client = "t01109";
@@ -252,10 +305,10 @@ contract MarketAPI{
 
         deals[deal_73.id] = deal_73;
 
-
         MarketTypes.MockDeal memory deal_74;
         deal_74.id = 74;
-        deal_74.cid ="baga6ea4seaqcxsr53negpkklyb4p6pojm2726yrr34lszn5j7qiacc7htv7vueq";
+        deal_74
+            .cid = "baga6ea4seaqcxsr53negpkklyb4p6pojm2726yrr34lszn5j7qiacc7htv7vueq";
         deal_74.size = 16777216;
         deal_74.verified = false;
         deal_74.client = "t01109";
@@ -271,10 +324,10 @@ contract MarketAPI{
 
         deals[deal_74.id] = deal_74;
 
-
         MarketTypes.MockDeal memory deal_75;
         deal_75.id = 75;
-        deal_75.cid ="baga6ea4seaqlkg6mss5qs56jqtajg5ycrhpkj2b66cgdkukf2qjmmzz6ayksuci";
+        deal_75
+            .cid = "baga6ea4seaqlkg6mss5qs56jqtajg5ycrhpkj2b66cgdkukf2qjmmzz6ayksuci";
         deal_75.size = 8388608;
         deal_75.verified = false;
         deal_75.client = "t01109";
@@ -290,10 +343,10 @@ contract MarketAPI{
 
         deals[deal_75.id] = deal_75;
 
-
         MarketTypes.MockDeal memory deal_76;
         deal_76.id = 76;
-        deal_76.cid ="baga6ea4seaqftmfuagbtycvrcskaol64eyio3dnzpjbllpwvwkv2nd5lqdiymby";
+        deal_76
+            .cid = "baga6ea4seaqftmfuagbtycvrcskaol64eyio3dnzpjbllpwvwkv2nd5lqdiymby";
         deal_76.size = 8388608;
         deal_76.verified = false;
         deal_76.client = "t01109";
@@ -309,10 +362,10 @@ contract MarketAPI{
 
         deals[deal_76.id] = deal_76;
 
-
         MarketTypes.MockDeal memory deal_77;
         deal_77.id = 77;
-        deal_77.cid ="baga6ea4seaqastxji7jl5lgnnkcrqrmacaghmxjsgif6dose77ggmn2dkwpnqoq";
+        deal_77
+            .cid = "baga6ea4seaqastxji7jl5lgnnkcrqrmacaghmxjsgif6dose77ggmn2dkwpnqoq";
         deal_77.size = 8388608;
         deal_77.verified = false;
         deal_77.client = "t01109";
@@ -328,10 +381,10 @@ contract MarketAPI{
 
         deals[deal_77.id] = deal_77;
 
-
         MarketTypes.MockDeal memory deal_78;
         deal_78.id = 78;
-        deal_78.cid ="baga6ea4seaqdl6geodjdraqwh56yqewcub4pxnlxsc7673xnfazhctawun22aha";
+        deal_78
+            .cid = "baga6ea4seaqdl6geodjdraqwh56yqewcub4pxnlxsc7673xnfazhctawun22aha";
         deal_78.size = 4194304;
         deal_78.verified = false;
         deal_78.client = "t01109";
@@ -347,10 +400,10 @@ contract MarketAPI{
 
         deals[deal_78.id] = deal_78;
 
-
         MarketTypes.MockDeal memory deal_79;
         deal_79.id = 79;
-        deal_79.cid ="baga6ea4seaqiun7s6npsi23ujt55qclad2rkxy44hx5thrmllgdl5pbcv32gsky";
+        deal_79
+            .cid = "baga6ea4seaqiun7s6npsi23ujt55qclad2rkxy44hx5thrmllgdl5pbcv32gsky";
         deal_79.size = 4194304;
         deal_79.verified = false;
         deal_79.client = "t01109";
@@ -366,10 +419,10 @@ contract MarketAPI{
 
         deals[deal_79.id] = deal_79;
 
-
         MarketTypes.MockDeal memory deal_80;
         deal_80.id = 80;
-        deal_80.cid ="baga6ea4seaqcxlx2n7wvk45vl5eqrocvfnpkxbdnsi3bv3u5lwowxjirlgt7wgy";
+        deal_80
+            .cid = "baga6ea4seaqcxlx2n7wvk45vl5eqrocvfnpkxbdnsi3bv3u5lwowxjirlgt7wgy";
         deal_80.size = 4194304;
         deal_80.verified = false;
         deal_80.client = "t01109";
@@ -385,10 +438,10 @@ contract MarketAPI{
 
         deals[deal_80.id] = deal_80;
 
-
         MarketTypes.MockDeal memory deal_81;
         deal_81.id = 81;
-        deal_81.cid ="baga6ea4seaqn7y7fwlhlshrysd2j443pyi6knof2c5qp533co2mqj5rzbq7t2pi";
+        deal_81
+            .cid = "baga6ea4seaqn7y7fwlhlshrysd2j443pyi6knof2c5qp533co2mqj5rzbq7t2pi";
         deal_81.size = 8388608;
         deal_81.verified = false;
         deal_81.client = "t01109";
@@ -404,10 +457,10 @@ contract MarketAPI{
 
         deals[deal_81.id] = deal_81;
 
-
         MarketTypes.MockDeal memory deal_82;
         deal_82.id = 82;
-        deal_82.cid ="baga6ea4seaqcxsr53negpkklyb4p6pojm2726yrr34lszn5j7qiacc7htv7vueq";
+        deal_82
+            .cid = "baga6ea4seaqcxsr53negpkklyb4p6pojm2726yrr34lszn5j7qiacc7htv7vueq";
         deal_82.size = 16777216;
         deal_82.verified = false;
         deal_82.client = "t01109";
