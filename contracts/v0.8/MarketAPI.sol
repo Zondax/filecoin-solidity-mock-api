@@ -15,7 +15,7 @@ contract MarketAPI {
         mock_generate_deals();
     }
 
-    /// Deposits the received value into the balance held in escrow.
+    /// @notice Deposits the received value into the balance held in escrow.
     /// @dev Because this is a mock method, no real balance is being deducted from the caller, nor incremented in the Storage Market actor (f05).
     function add_balance(
         MarketTypes.AddBalanceParams memory params
@@ -23,8 +23,8 @@ contract MarketAPI {
         balances[params.provider_or_client] += msg.value;
     }
 
-    /// Attempt to withdraw the specified amount from the balance held in escrow.
-    /// If less than the specified amount is available, yields the entire available balance.
+    /// @notice Attempt to withdraw the specified amount from the balance held in escrow.
+    /// @notice If less than the specified amount is available, yields the entire available balance.
     /// @dev This method should be called by an approved address, but the mock does not check that the caller is an approved party.
     /// @dev Because this is a mock method, no real balance is deposited in the designated address, nor decremented from the Storage Market actor (f05).
     function withdraw_balance(
@@ -41,7 +41,7 @@ contract MarketAPI {
         return MarketTypes.WithdrawBalanceReturn(tmp);
     }
 
-    /// Returns the escrow balance and locked amount for an address.
+    /// @return the escrow balance and locked amount for an address.
     function get_balance(
         string memory addr
     ) public view returns (MarketTypes.GetBalanceReturn memory) {
@@ -50,11 +50,9 @@ contract MarketAPI {
         return MarketTypes.GetBalanceReturn(actualBalance, 0);
     }
 
-    /// Returns the data commitment and size of a deal proposal.
-    /// This will be available after the deal is published (whether or not is is activated)
-    /// and up until some undefined period after it is terminated.
-    /// FIXME set data values correctly, currently returning fixed data, feel free to adjust
-    /// in your local mock.
+    /// @return the data commitment and size of a deal proposal.
+    /// @notice This will be available after the deal is published (whether or not is is activated) and up until some undefined period after it is terminated.
+    /// @dev set data values correctly, currently returning fixed data, feel free to adjust in your local mock.
     function get_deal_data_commitment(
         MarketTypes.GetDealDataCommitmentParams memory params
     ) public view returns (MarketTypes.GetDealDataCommitmentReturn memory) {
@@ -67,7 +65,7 @@ contract MarketAPI {
             );
     }
 
-    /// Returns the client of a deal proposal.
+    /// @return the client of a deal proposal.
     function get_deal_client(
         MarketTypes.GetDealClientParams memory params
     ) public view returns (MarketTypes.GetDealClientReturn memory) {
@@ -76,7 +74,7 @@ contract MarketAPI {
         return MarketTypes.GetDealClientReturn(deals[params.id].client);
     }
 
-    /// Returns the provider of a deal proposal.
+    /// @return the provider of a deal proposal.
     function get_deal_provider(
         MarketTypes.GetDealProviderParams memory params
     ) public view returns (MarketTypes.GetDealProviderReturn memory) {
@@ -85,7 +83,7 @@ contract MarketAPI {
         return MarketTypes.GetDealProviderReturn(deals[params.id].provider);
     }
 
-    /// Returns the label of a deal proposal.
+    /// @return the label of a deal proposal.
     function get_deal_label(
         MarketTypes.GetDealLabelParams memory params
     ) public view returns (MarketTypes.GetDealLabelReturn memory) {
@@ -94,7 +92,7 @@ contract MarketAPI {
         return MarketTypes.GetDealLabelReturn(deals[params.id].label);
     }
 
-    /// Returns the start epoch and duration (in epochs) of a deal proposal.
+    /// @return the start epoch and duration (in epochs) of a deal proposal.
     function get_deal_term(
         MarketTypes.GetDealTermParams memory params
     ) public view returns (MarketTypes.GetDealTermReturn memory) {
@@ -107,9 +105,8 @@ contract MarketAPI {
             );
     }
 
-    /// Returns the per-epoch price of a deal proposal.
-    /// TODO renamed to get_deal_total_price in builtin-actors.
-    function get_deal_epoch_price(
+    /// @return the per-epoch price of a deal proposal.
+    function get_deal_total_price(
         MarketTypes.GetDealEpochPriceParams memory params
     ) public view returns (MarketTypes.GetDealEpochPriceReturn memory) {
         require(deals[params.id].id > 0);
@@ -120,7 +117,7 @@ contract MarketAPI {
             );
     }
 
-    /// Returns the client collateral requirement for a deal proposal.
+    /// @return the client collateral requirement for a deal proposal.
     function get_deal_client_collateral(
         MarketTypes.GetDealClientCollateralParams memory params
     ) public view returns (MarketTypes.GetDealClientCollateralReturn memory) {
@@ -132,7 +129,7 @@ contract MarketAPI {
             );
     }
 
-    /// Returns the provider collateral requirement for a deal proposal.
+    /// @return the provider collateral requirement for a deal proposal.
     function get_deal_provider_collateral(
         MarketTypes.GetDealProviderCollateralParams memory params
     ) public view returns (MarketTypes.GetDealProviderCollateralReturn memory) {
@@ -144,9 +141,8 @@ contract MarketAPI {
             );
     }
 
-    /// Returns the verified flag for a deal proposal.
-    /// Note that the source of truth for verified allocations and claims is
-    /// the verified registry actor.
+    /// @return the verified flag for a deal proposal.
+    /// @notice Note that the source of truth for verified allocations and claims is the verified registry actor.
     function get_deal_verified(
         MarketTypes.GetDealVerifiedParams memory params
     ) public view returns (MarketTypes.GetDealVerifiedReturn memory) {
@@ -155,11 +151,9 @@ contract MarketAPI {
         return MarketTypes.GetDealVerifiedReturn(deals[params.id].verified);
     }
 
-    /// Fetches activation state for a deal.
-    /// This will be available from when the proposal is published until an undefined period after
-    /// the deal finishes (either normally or by termination).
-    /// Returns USR_NOT_FOUND if the deal doesn't exist (yet), or EX_DEAL_EXPIRED if the deal
-    /// has been removed from state.
+    /// @notice Fetches activation state for a deal.
+    /// @notice This will be available from when the proposal is published until an undefined period after the deal finishes (either normally or by termination).
+    /// @return USR_NOT_FOUND if the deal doesn't exist (yet), or EX_DEAL_EXPIRED if the deal has been removed from state.
     function get_deal_activation(
         MarketTypes.GetDealActivationParams memory params
     ) public view returns (MarketTypes.GetDealActivationReturn memory) {
@@ -172,9 +166,8 @@ contract MarketAPI {
             );
     }
 
-    /// Publish a new set of storage deals (not yet included in a sector).
-    /// TODO renamed to publish_storage_deals, taking a vector.
-    function publish_deal(bytes memory raw_auth_params, address callee) public {
+    /// @notice Publish a new set of storage deals (not yet included in a sector).
+    function publish_storage_deals(bytes memory raw_auth_params, address callee) public {
         // calls standard filecoin receiver on message authentication api method number
         (bool success, ) = callee.call(
             abi.encodeWithSignature(
@@ -187,7 +180,7 @@ contract MarketAPI {
         require(success, "client contract failed to authorize deal publish");
     }
 
-    /// Adds mock deal data to the internal state of this mock.
+    /// @notice Adds mock deal data to the internal state of this mock.
     /// @dev Feel free to adjust the data here to make it align with deals in your network.
     function mock_generate_deals() internal {
         MarketTypes.MockDeal memory deal_67;
