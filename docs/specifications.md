@@ -304,23 +304,3 @@ sidebar_position: 2
 | get_deal_verified            |                                      |     |     |                                                                                         |
 | Params                       | uint64 deal_id;                      |     |     | Return data in the mock deals tab; if deal_id does not exisit in that tab, return error |
 | Return                       | bool verified;                       |     |     | Return data in the mock deals tab; if deal_id does not exisit in that tab, return error |
-
-### Deals
-|Deal ID|Piece CID|Activated|Terminated|size|client|provider|label|start|end|price_per_epoch|client_collateral|provider_collateral|verified|
-|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|:----|
-|67|baga6ea4seaqlkg6mss5qs56jqtajg5ycrhpkj2b66cgdkukf2qjmmzz6ayksuci|TRUE|FALSE|8388608|t01109|t01113|mAXCg5AIg8YBXbFjtdBy1iZjpDYAwRSt0elGLF5GvTqulEii1VcM|25245|545150|1100000000000|0|0|FALSE|
-|68|baga6ea4seaqiun7s6npsi23ujt55qclad2rkxy44hx5thrmllgdl5pbcv32gsky|TRUE|FALSE|4194304|t01109|t01113|mAXCg5AIg4KyGboe+GUQSZFtHmtUnk2IcXbaRFl4V1YOmC9vgoms|25249|545150|1700000000000|0|0|FALSE|
-|69|baga6ea4seaqftmfuagbtycvrcskaol64eyio3dnzpjbllpwvwkv2nd5lqdiymby|TRUE|FALSE|8388608|t01109|t01113|mAXCg5AIgxXsZaQ0qnC01BIARoPmPYa/qOOoI5se/a+R5PfUTV2g|25246|545150|1200000000000|0|0|FALSE|
-|70|baga6ea4seaqastxji7jl5lgnnkcrqrmacaghmxjsgif6dose77ggmn2dkwpnqoq|TRUE|FALSE|8388608|t01109|t01113|mAXCg5AIgn6xPVzAVUsugSuUtyJkSdzakFc17R5LxQ0+ql2RpTpI|25246|545150|1300000000000|0|0|FALSE|
-|71|baga6ea4seaqn7y7fwlhlshrysd2j443pyi6knof2c5qp533co2mqj5rzbq7t2pi|TRUE|FALSE|8388608|t01109|t01113|mAXCg5AIgw4oywPmiPRxJLioYxMdIkKmaJ4FFumCvS/GC4gEzGng|25247|545150|1400000000000|0|0|FALSE|
-|72|baga6ea4seaqdl6geodjdraqwh56yqewcub4pxnlxsc7673xnfazhctawun22aha|TRUE|FALSE|4194304|t01109|t01113|mAXCg5AIglPFhEfVlJwt+dkvz/JNQ8BakUxmAZb1dQ8F0sKnHeFE|25248|545150|1600000000000|0|0|FALSE|
-|73|baga6ea4seaqcxlx2n7wvk45vl5eqrocvfnpkxbdnsi3bv3u5lwowxjirlgt7wgy|TRUE|FALSE|4194304|t01109|t01113|mAXCg5AIgmsykC9fRbd/zT76TR4zK42g520tAsRzr9+w4MeT4sJc|25250|545150|1800000000000|0|0|FALSE|
-|74|baga6ea4seaqcxsr53negpkklyb4p6pojm2726yrr34lszn5j7qiacc7htv7vueq|TRUE|FALSE|16777216|t01109|t01113|mAXCg5AIgmtJq7yh1JTsGJkPrA1hLaSnXZIE+MfeeP1bT8OOGb4A|25248|545150|1500000000000|0|0|FALSE|
-|75|baga6ea4seaqlkg6mss5qs56jqtajg5ycrhpkj2b66cgdkukf2qjmmzz6ayksuci|TRUE|FALSE|8388608|t01109|t01113|mAXCg5AIg8YBXbFjtdBy1iZjpDYAwRSt0elGLF5GvTqulEii1VcM|25802|545150|1100000000000|0|0|FALSE|
-|76|baga6ea4seaqftmfuagbtycvrcskaol64eyio3dnzpjbllpwvwkv2nd5lqdiymby|TRUE|FALSE|8388608|t01109|t01113|mAXCg5AIgxXsZaQ0qnC01BIARoPmPYa/qOOoI5se/a+R5PfUTV2g|25802|545150|1200000000000|0|0|FALSE|
-|77|baga6ea4seaqastxji7jl5lgnnkcrqrmacaghmxjsgif6dose77ggmn2dkwpnqoq|TRUE|FALSE|8388608|t01109|t01113|mAXCg5AIgn6xPVzAVUsugSuUtyJkSdzakFc17R5LxQ0+ql2RpTpI|25803|545150|1300000000000|0|0|FALSE|
-|78|baga6ea4seaqdl6geodjdraqwh56yqewcub4pxnlxsc7673xnfazhctawun22aha|TRUE|FALSE|4194304|t01109|t01113|mAXCg5AIglPFhEfVlJwt+dkvz/JNQ8BakUxmAZb1dQ8F0sKnHeFE|25803|545150|1600000000000|0|0|FALSE|
-|79|baga6ea4seaqiun7s6npsi23ujt55qclad2rkxy44hx5thrmllgdl5pbcv32gsky|TRUE|FALSE|4194304|t01109|t01113|mAXCg5AIg4KyGboe+GUQSZFtHmtUnk2IcXbaRFl4V1YOmC9vgoms|25803|545150|1700000000000|0|0|FALSE|
-|80|baga6ea4seaqcxlx2n7wvk45vl5eqrocvfnpkxbdnsi3bv3u5lwowxjirlgt7wgy|TRUE|FALSE|4194304|t01109|t01113|mAXCg5AIgmsykC9fRbd/zT76TR4zK42g520tAsRzr9+w4MeT4sJc|25804|545150|1800000000000|0|0|FALSE|
-|81|baga6ea4seaqn7y7fwlhlshrysd2j443pyi6knof2c5qp533co2mqj5rzbq7t2pi|TRUE|FALSE|8388608|t01109|t01113|mAXCg5AIgw4oywPmiPRxJLioYxMdIkKmaJ4FFumCvS/GC4gEzGng|25803|545150|1400000000000|0|0|FALSE|
-|82|baga6ea4seaqcxsr53negpkklyb4p6pojm2726yrr34lszn5j7qiacc7htv7vueq|TRUE|FALSE|16777216|t01109|t01113|mAXCg5AIgmtJq7yh1JTsGJkPrA1hLaSnXZIE+MfeeP1bT8OOGb4A|25803|545150|1500000000000|0|0|FALSE|
