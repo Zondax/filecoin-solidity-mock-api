@@ -2,6 +2,23 @@
 pragma solidity >=0.4.25 <= 0.8.15;
 
 library MarketTypes{
+    struct MockDeal{
+        uint64 id;
+        string cid;
+        uint64 size;
+        bool verified;
+        string client;
+        string provider;
+        string label;
+        int64 start;
+        int64 end;
+        uint256 price_per_epoch;
+        uint256 provider_collateral;
+        uint256 client_collateral;
+        int64 activated;
+        int64 terminated;
+    }
+
     struct AddBalanceParams {
         string provider_or_client;
     }
@@ -34,7 +51,7 @@ library MarketTypes{
     }
 
     struct GetDealClientReturn {
-        uint64 client;
+        string client;
     }
 
     struct GetDealProviderParams {
@@ -42,7 +59,7 @@ library MarketTypes{
     }
 
     struct GetDealProviderReturn {
-        uint64 provider;
+        string provider;
     }
 
     struct GetDealLabelParams {
@@ -50,7 +67,7 @@ library MarketTypes{
     }
 
     struct GetDealLabelReturn {
-        bytes label;
+        string label;
     }
 
     struct GetDealTermParams {
@@ -63,7 +80,7 @@ library MarketTypes{
     }
 
     struct GetDealEpochPriceParams {
-        int64 id;
+        uint64 id;
     }
 
     struct GetDealEpochPriceReturn {

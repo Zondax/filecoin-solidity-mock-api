@@ -30,7 +30,7 @@ contract FilecoinMarketMockTest {
         marketApiInstance.add_balance(params);
     }
 
-    function get_balance_test() public{
+    function get_balance_test() public view {
         MarketAPI marketApiInstance = MarketAPI(marketApiAddress);
 
         string memory params = "t01113";
