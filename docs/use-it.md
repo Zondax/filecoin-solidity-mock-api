@@ -16,8 +16,8 @@ In order to deploy these libraries, please refer to [this section](./deploy-it.m
 
 ```solidity
 import { MarketAPI } from "../MarketAPI.sol";
-import { CommonTypes } from "../typeLibraries/CommonTypes.sol";
-import { MarketTypes } from "../typeLibraries/MarketTypes.sol";
+import { CommonTypes } from "../types/CommonTypes.sol";
+import { MarketTypes } from "../types/MarketTypes.sol";
 ```
 
 ### Create an callable instance 

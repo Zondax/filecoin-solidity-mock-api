@@ -2,8 +2,8 @@
 pragma solidity >=0.4.25 <=0.8.15;
 
 import {MinerAPI} from "../MinerAPI.sol";
-import {CommonTypes} from "../typeLibraries/CommonTypes.sol";
-import {MinerTypes} from "../typeLibraries/MinerTypes.sol";
+import {CommonTypes} from "../types/CommonTypes.sol";
+import {MinerTypes} from "../types/MinerTypes.sol";
 
 contract FilecoinMinerMockTest {
     address minerApiAddress;
