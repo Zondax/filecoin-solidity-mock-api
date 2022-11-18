@@ -3,6 +3,10 @@ pragma solidity >=0.4.25 <= 0.8.15;
 
 import "./typeLibraries/MinerTypes.sol";
 
+/// @title Filecoin miner actor API for Solidity.
+/// @author Zondax AG
+/// @notice It is mock with specific scenarios based on the parameters used to call its methods. It is meant to serve as the first entry point, and be replaced seamlessly in the future by the real API implementation tath actually calls the filecoin actor.
+/// @dev Most of function calls are currently implemented using some kind of struct for parameters and returns.
 contract MinerAPI{
     string owner;
     bool isBeneficiarySet = false;

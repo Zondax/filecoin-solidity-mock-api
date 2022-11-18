@@ -3,6 +3,8 @@ pragma solidity >=0.4.25 <= 0.8.15;
 
 import "./CommonTypes.sol";
 
+/// @title Filecoin miner actor types for Solidity.
+/// @author Zondax AG
 library MinerTypes{
     struct GetOwnerReturn {
         string owner;

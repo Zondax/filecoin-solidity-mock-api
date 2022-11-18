@@ -3,6 +3,10 @@ pragma solidity >=0.4.25 <= 0.8.15;
 
 import "./typeLibraries/MarketTypes.sol";
 
+/// @title Filecoin market actor API for Solidity.
+/// @author Zondax AG
+/// @notice It is mock with specific scenarios based on the parameters used to call its methods. It is meant to serve as the first entry point, and be replaced seamlessly in the future by the real API implementation tath actually calls the filecoin actor.
+/// @dev Most of function calls are currently implemented using some kind of struct for parameters and returns.
 contract MarketAPI{
     mapping(string => uint256) balances;
     mapping(uint64 => MarketTypes.MockDeal) deals;
@@ -11,10 +15,13 @@ contract MarketAPI{
         generate_deal_mocks();
     }
 
+
+    /// @param params MarketTypes.AddBalanceParams
     function add_balance(MarketTypes.AddBalanceParams memory params) public payable {
         balances[params.provider_or_client] += msg.value;
     }
 
+    /// @param params MarketTypes.WithdrawBalanceParams
     function withdraw_balance(MarketTypes.WithdrawBalanceParams memory params) public returns (MarketTypes.WithdrawBalanceReturn memory) {
         uint256 tmp = balances[params.provider_or_client];
         if(balances[params.provider_or_client] >= params.tokenAmount){
@@ -27,6 +34,7 @@ contract MarketAPI{
         return MarketTypes.WithdrawBalanceReturn(tmp);
     }
 
+    /// @param addr string
     function get_balance(string memory addr) public view returns (MarketTypes.GetBalanceReturn memory) {
         uint256 actualBalance = balances[addr];
 
@@ -34,60 +42,70 @@ contract MarketAPI{
     }
 
     // FIXME set data values correctly
+    /// @param params MarketTypes.GetDealDataCommitmentParams
     function get_deal_data_commitment(MarketTypes.GetDealDataCommitmentParams memory params) public view returns (MarketTypes.GetDealDataCommitmentReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealDataCommitmentReturn(bytes("0x111111"), deals[params.id].size);
     }
 
+    /// @param params MarketTypes.GetDealClientParams
     function get_deal_client(MarketTypes.GetDealClientParams memory params) public view returns (MarketTypes.GetDealClientReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealClientReturn(deals[params.id].client);
     }
 
+    /// @param params MarketTypes.GetDealProviderParams
     function get_deal_provider(MarketTypes.GetDealProviderParams memory params) public view returns (MarketTypes.GetDealProviderReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealProviderReturn(deals[params.id].provider);
     }
 
+    /// @param params MarketTypes.GetDealLabelParams
     function get_deal_label(MarketTypes.GetDealLabelParams memory params) public view returns (MarketTypes.GetDealLabelReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealLabelReturn(deals[params.id].label);
     }
 
+    /// @param params MarketTypes.GetDealTermParams
     function get_deal_term(MarketTypes.GetDealTermParams memory params) public view returns (MarketTypes.GetDealTermReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealTermReturn(deals[params.id].start, deals[params.id].end);
     }
 
+    /// @param params MarketTypes.GetDealEpochPriceParams
     function get_deal_epoch_price(MarketTypes.GetDealEpochPriceParams memory params) public view returns (MarketTypes.GetDealEpochPriceReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealEpochPriceReturn(deals[params.id].price_per_epoch);
     }
 
+    /// @param params MarketTypes.GetDealClientCollateralParams
     function get_deal_client_collateral(MarketTypes.GetDealClientCollateralParams memory params) public view returns (MarketTypes.GetDealClientCollateralReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealClientCollateralReturn(deals[params.id].client_collateral);
     }
 
+    /// @param params MarketTypes.GetDealProviderCollateralParams
     function get_deal_provider_collateral(MarketTypes.GetDealProviderCollateralParams memory params) public view returns (MarketTypes.GetDealProviderCollateralReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealProviderCollateralReturn(deals[params.id].provider_collateral);
     }
 
+    /// @param params MarketTypes.GetDealVerifiedParams
     function get_deal_verified(MarketTypes.GetDealVerifiedParams memory params) public view returns (MarketTypes.GetDealVerifiedReturn memory) {
         require(deals[params.id].id > 0);
 
         return MarketTypes.GetDealVerifiedReturn(deals[params.id].verified);
     }
 
+    /// @param params MarketTypes.GetDealActivationParams
     function get_deal_activation(MarketTypes.GetDealActivationParams memory params) public view returns (MarketTypes.GetDealActivationReturn memory) {
         require(deals[params.id].id > 0);
 
