@@ -15,7 +15,7 @@ contract FilecoinMarketMockTest {
     function market_withdraw_balance_test() public view{
         MarketAPI marketApiInstance = MarketAPI(marketApiAddress);
 
-        bytes memory addr = bytes("0x1111");
+        string memory addr = "t01113";
         MarketTypes.WithdrawBalanceParams memory params = MarketTypes.WithdrawBalanceParams(addr, 1);
 
         MarketTypes.WithdrawBalanceReturn memory response = marketApiInstance.withdraw_balance(params);
@@ -24,7 +24,7 @@ contract FilecoinMarketMockTest {
     function market_add_balance_test() public{
         MarketAPI marketApiInstance = MarketAPI(marketApiAddress);
 
-        bytes memory addr = bytes("0x1111");
+        string memory addr = "t01113";
         MarketTypes.AddBalanceParams memory params = MarketTypes.AddBalanceParams(addr);
 
         marketApiInstance.add_balance(params);
@@ -33,7 +33,7 @@ contract FilecoinMarketMockTest {
     function get_balance_test() public{
         MarketAPI marketApiInstance = MarketAPI(marketApiAddress);
 
-        bytes memory params = bytes("0x1111");
+        string memory params = "t01113";
 
         MarketTypes.GetBalanceReturn memory response = marketApiInstance.get_balance(params);
     }

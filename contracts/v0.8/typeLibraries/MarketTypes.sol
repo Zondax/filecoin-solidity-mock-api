@@ -3,11 +3,11 @@ pragma solidity >=0.4.25 <= 0.8.15;
 
 library MarketTypes{
     struct AddBalanceParams {
-        bytes provider_or_client;
+        string provider_or_client;
     }
 
     struct WithdrawBalanceParams {
-        bytes provider_or_client;
+        string provider_or_client;
         uint256 tokenAmount;
     }
 

@@ -16,7 +16,7 @@ contract FilecoinMinerMockTest {
     function mock_set_owner_test() public{
         MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
 
-        bytes memory addr = bytes("0x1111");
+        string memory addr = "t01113";
         minerApiInstance.mock_set_owner(addr);
     }
 
@@ -68,7 +68,7 @@ contract FilecoinMinerMockTest {
     function change_owner_address_test() public {
         MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
 
-        bytes memory addr = bytes("0x1111");
+        string memory addr = "t01113";
         minerApiInstance.change_owner_address(addr);
     }
 }

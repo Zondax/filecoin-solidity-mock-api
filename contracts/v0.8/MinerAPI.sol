@@ -4,12 +4,12 @@ pragma solidity >=0.4.25 <= 0.8.15;
 import "./typeLibraries/MinerTypes.sol";
 
 contract MinerAPI{
-    bytes owner;
+    string owner;
     bool isBeneficiarySet = false;
     CommonTypes.ActiveBeneficiary activeBeneficiary;
     mapping(CommonTypes.SectorSize => uint64) sectorSizesBytes;
 
-    constructor(bytes memory _owner){
+    constructor(string memory _owner){
         owner = _owner;
 
         sectorSizesBytes[CommonTypes.SectorSize._2KiB] = 2 << 10;
@@ -19,18 +19,18 @@ contract MinerAPI{
         sectorSizesBytes[CommonTypes.SectorSize._64GiB] = 2 * (32 << 30);
     }
 
-    function mock_set_owner(bytes memory addr) public {
-        require(owner.length == 0);
+    function mock_set_owner(string memory addr) public {
+        require(bytes(owner).length == 0);
         owner = addr;
     }
 
     function get_owner() public  view returns (MinerTypes.GetOwnerReturn memory)  {
-        require(owner.length != 0);
+        require(bytes(owner).length != 0);
 
         return MinerTypes.GetOwnerReturn(owner);
     }
 
-    function change_owner_address(bytes memory addr) public {
+    function change_owner_address(string memory addr) public {
         owner = addr;
     }
 
