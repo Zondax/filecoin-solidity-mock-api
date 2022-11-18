@@ -84,7 +84,7 @@ sidebar_position: 2
 | CompactSectorNumbers                     | :heavy_multiplication_x: |
 | ConfirmUpdateWorkerKey                   | :heavy_multiplication_x: |
 | RepayDebt                                | :heavy_multiplication_x: |
-| ChangeOwnerAddress                       | :heavy_multiplication_x: |
+| ChangeOwnerAddress                        | :heavy_check_mark:       |
 | DisputeWindowedPoSt                      | :heavy_multiplication_x: |
 | PreCommitSectorBatch                     | :heavy_multiplication_x: |
 | ProveCommitAggregate                     | :heavy_multiplication_x: |

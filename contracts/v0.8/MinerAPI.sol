@@ -19,7 +19,7 @@ contract MinerAPI{
         sectorSizesBytes[CommonTypes.SectorSize._64GiB] = 2 * (32 << 30);
     }
 
-    function set_owner(bytes memory addr) public {
+    function mock_set_owner(bytes memory addr) public {
         require(owner.length == 0);
         owner = addr;
     }
@@ -28,6 +28,10 @@ contract MinerAPI{
         require(owner.length != 0);
 
         return MinerTypes.GetOwnerReturn(owner);
+    }
+
+    function change_owner_address(bytes memory addr) public {
+        owner = addr;
     }
 
     function is_controlling_address( MinerTypes.IsControllingAddressParam memory params ) public pure returns (MinerTypes.IsControllingAddressReturn memory) {
