@@ -19,7 +19,7 @@ contract MinerAPI{
         sectorSizesBytes[CommonTypes.SectorSize._64GiB] = 2 * (32 << 30);
     }
 
-    function set_owner(bytes memory addr) public {
+    function mock_set_owner(bytes memory addr) public {
         require(owner.length == 0);
         owner = addr;
     }
