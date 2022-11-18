@@ -13,6 +13,7 @@ contract MinerAPI {
     CommonTypes.ActiveBeneficiary activeBeneficiary;
     mapping(CommonTypes.SectorSize => uint64) sectorSizesBytes;
 
+    /// @notice (Mock method) Sets the owner of a Miner on contract deployment, which will be returned via get_owner().
     constructor(string memory _owner) {
         owner = _owner;
 
@@ -23,15 +24,15 @@ contract MinerAPI {
         sectorSizesBytes[CommonTypes.SectorSize._64GiB] = 2 * (32 << 30);
     }
 
-    /// (Mock method) Sets the owner of a Miner, which will be returned via get_owner().
+    /// @notice (Mock method) Sets the owner of a Miner, which will be returned via get_owner().
     function mock_set_owner(string memory addr) public {
         require(bytes(owner).length == 0);
         owner = addr;
     }
 
-    /// Returns the owner address of a Miner.
-    /// - Income and returned collateral are paid to this address
-    /// - This address is also allowed to change the worker address for the miner
+    /// @notice Income and returned collateral are paid to this address
+    /// @notice This address is also allowed to change the worker address for the miner
+    /// @return the owner address of a Miner
     function get_owner()
         public
         view
@@ -42,28 +43,26 @@ contract MinerAPI {
         return MinerTypes.GetOwnerReturn(owner);
     }
 
-    /// Proposes or confirms a change of owner address.
-    /// If invoked by the current owner, proposes a new owner address for confirmation. If the proposed address is the
-    /// current owner address, revokes any existing proposal.
-    /// If invoked by the previously proposed address, with the same proposal, changes the current owner address to be
-    /// that proposed address.
+    /// @param addr New owner address
+    /// @notice Proposes or confirms a change of owner address.
+    /// @notice If invoked by the current owner, proposes a new owner address for confirmation. If the proposed address is the current owner address, revokes any existing proposal that proposed address.
     function change_owner_address(string memory addr) public {
         owner = addr;
     }
 
-    /// Returns whether the provided address is "controlling".
-    /// The "controlling" addresses are the Owner, the Worker, and all Control Addresses.
+    /// @param params The "controlling" addresses are the Owner, the Worker, and all Control Addresses.
+    /// @return Whether the provided address is "controlling".
     function is_controlling_address(
         MinerTypes.IsControllingAddressParam memory params
     ) public pure returns (MinerTypes.IsControllingAddressReturn memory) {
         return MinerTypes.IsControllingAddressReturn(false);
     }
 
-    /// Returns the miner's sector size.
+    /// @return the miner's sector size.
     function get_sector_size()
         public
         view
-        returns (MinerTypes.GetSectorSizeReturn memory params)
+        returns (MinerTypes.GetSectorSizeReturn memory)
     {
         return
             MinerTypes.GetSectorSizeReturn(
@@ -71,22 +70,22 @@ contract MinerAPI {
             );
     }
 
-    /// Returns the available balance of this miner.
-    /// This is calculated as actor balance - (vesting funds + pre-commit deposit + initial pledge requirement + fee debt)
-    /// Can go negative if the miner is in IP debt.
+    /// @notice This is calculated as actor balance - (vesting funds + pre-commit deposit + initial pledge requirement + fee debt)
+    /// @notice Can go negative if the miner is in IP debt.
+    /// @return the available balance of this miner.
     function get_available_balance()
         public
         pure
-        returns (MinerTypes.GetAvailableBalanceReturn memory params)
+        returns (MinerTypes.GetAvailableBalanceReturn memory)
     {
         return MinerTypes.GetAvailableBalanceReturn(10000000000000000000000);
     }
 
-    /// Returns the funds vesting in this miner as a list of (vesting_epoch, vesting_amount) tuples.
+    /// @return the funds vesting in this miner as a list of (vesting_epoch, vesting_amount) tuples.
     function get_vesting_funds()
         public
         pure
-        returns (MinerTypes.GetVestingFundsReturn memory params)
+        returns (MinerTypes.GetVestingFundsReturn memory)
     {
         CommonTypes.VestingFunds[]
             memory vesting_funds = new CommonTypes.VestingFunds[](1);
@@ -98,10 +97,9 @@ contract MinerAPI {
         return MinerTypes.GetVestingFundsReturn(vesting_funds);
     }
 
-    /// Proposes or confirms a change of beneficiary address.
-    /// A proposal must be submitted by the owner, and takes effect after approval of both the proposed beneficiary and current beneficiary,
-    /// if applicable, any current beneficiary that has time and quota remaining.
-    /// See FIP-0029, https://github.com/filecoin-project/FIPs/blob/master/FIPS/fip-0029.md
+    /// @notice Proposes or confirms a change of beneficiary address.
+    /// @notice A proposal must be submitted by the owner, and takes effect after approval of both the proposed beneficiary and current beneficiary, if applicable, any current beneficiary that has time and quota remaining.
+    /// @notice See FIP-0029, https://github.com/filecoin-project/FIPs/blob/master/FIPS/fip-0029.md
     function change_beneficiary(
         MinerTypes.ChangeBeneficiaryParams memory params
     ) public {
@@ -120,9 +118,8 @@ contract MinerAPI {
         }
     }
 
-    /// Retrieves the currently active and proposed beneficiary information.
-    /// This method is for use by other actors (such as those acting as beneficiaries),
-    /// and to abstract the state representation for clients.
+    /// @notice This method is for use by other actors (such as those acting as beneficiaries), and to abstract the state representation for clients.
+    /// @notice Retrieves the currently active and proposed beneficiary information.
     function get_beneficiary()
         public
         view

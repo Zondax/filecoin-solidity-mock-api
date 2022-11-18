@@ -286,7 +286,7 @@ sidebar_position: 2
 | Return                       | int64 start;                         |     |     | Return data in the mock deals tab; if deal_id does not exisit in that tab, return error |
 |                              | int64 end;                           |     |     | Return data in the mock deals tab; if deal_id does not exisit in that tab, return error |
 |                              |                                      |     |     |                                                                                         |
-| get_deal_epoch_price         |                                      |     |     |                                                                                         |
+| get_deal_total_price         |                                      |     |     |                                                                                         |
 | Params                       | uint64 deal_id;                      |     |     | Return data in the mock deals tab; if deal_id does not exisit in that tab, return error |
 | Return                       | uint256 price_per_epoch;             |     |     | Return data in the mock deals tab; if deal_id does not exisit in that tab, return error |
 |                              |                                      |     |     |                                                                                         |

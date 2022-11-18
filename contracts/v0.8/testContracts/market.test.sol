@@ -124,7 +124,7 @@ contract FilecoinMarketMockTest {
         return response;
     }
 
-    function get_deal_epoch_price_test()
+    function get_deal_total_price_test()
         public
         view
         returns (MarketTypes.GetDealEpochPriceReturn memory)
@@ -135,7 +135,7 @@ contract FilecoinMarketMockTest {
             .GetDealEpochPriceParams(67);
 
         MarketTypes.GetDealEpochPriceReturn memory response = marketApiInstance
-            .get_deal_epoch_price(params);
+            .get_deal_total_price(params);
         return response;
     }
 
