@@ -64,4 +64,11 @@ contract FilecoinMinerMockTest {
 
         MinerTypes.GetBeneficiaryReturn memory response = minerApiInstance.get_beneficiary();
     }
+
+    function change_owner_address_test() public {
+        MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
+
+        bytes memory addr = bytes("0x1111");
+        minerApiInstance.change_owner_address(addr);
+    }
 }

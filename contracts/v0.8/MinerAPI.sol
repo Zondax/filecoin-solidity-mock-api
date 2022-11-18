@@ -30,6 +30,10 @@ contract MinerAPI{
         return MinerTypes.GetOwnerReturn(owner);
     }
 
+    function change_owner_address(bytes memory addr) public {
+        owner = addr;
+    }
+
     function is_controlling_address( MinerTypes.IsControllingAddressParam memory params ) public pure returns (MinerTypes.IsControllingAddressReturn memory) {
         return MinerTypes.IsControllingAddressReturn(false);
     }
