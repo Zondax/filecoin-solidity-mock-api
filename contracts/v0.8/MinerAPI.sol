@@ -133,6 +133,4 @@ contract MinerAPI {
         CommonTypes.PendingBeneficiaryChange memory proposed;
         return MinerTypes.GetBeneficiaryReturn(activeBeneficiary, proposed);
     }
-
-    function get_sector_size_from_enum() internal returns (uint64) {}
 }
