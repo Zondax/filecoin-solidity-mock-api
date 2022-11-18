@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity >=0.4.25 <=0.8.15;
 
-import "./typeLibraries/MinerTypes.sol";
+import "./types/MinerTypes.sol";
 
 /// @title Filecoin miner actor API for Solidity.
 /// @author Zondax AG

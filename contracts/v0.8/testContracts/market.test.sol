@@ -2,8 +2,8 @@
 pragma solidity >=0.4.25 <=0.8.15;
 
 import {MarketAPI} from "../MarketAPI.sol";
-import {CommonTypes} from "../typeLibraries/CommonTypes.sol";
-import {MarketTypes} from "../typeLibraries/MarketTypes.sol";
+import {CommonTypes} from "../types/CommonTypes.sol";
+import {MarketTypes} from "../types/MarketTypes.sol";
 
 contract FilecoinMarketMockTest {
     address marketApiAddress;

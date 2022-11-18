@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity >=0.4.25 <=0.8.15;
 
-import "./typeLibraries/MarketTypes.sol";
+import "./types/MarketTypes.sol";
 
 contract MarketAPI {
     mapping(string => uint256) balances;
