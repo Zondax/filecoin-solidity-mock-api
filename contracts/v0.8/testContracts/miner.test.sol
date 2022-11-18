@@ -16,40 +16,44 @@ contract FilecoinMinerMockTest {
     function mock_set_owner_test() public{
         MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
 
-        bytes memory addr = bytes("0x1111");
+        string memory addr = "t01113";
         minerApiInstance.mock_set_owner(addr);
     }
 
-    function get_owner_test() public  view{
+    function get_owner_test() public  view returns (MinerTypes.GetOwnerReturn memory){
         MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
         MinerTypes.GetOwnerReturn memory response = minerApiInstance.get_owner();
+        return response;
     }
 
-    function is_controlling_address_test() public view {
+    function is_controlling_address_test() public view returns (MinerTypes.IsControllingAddressReturn memory) {
         MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
 
         MinerTypes.IsControllingAddressParam memory params;
         MinerTypes.IsControllingAddressReturn memory response = minerApiInstance.is_controlling_address(params);
+        return response;
     }
 
-    function get_sector_size_test() public view{
+    function get_sector_size_test() public view returns (MinerTypes.GetSectorSizeReturn memory){
         MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
 
         MinerTypes.GetSectorSizeReturn memory response = minerApiInstance.get_sector_size();
+        return response;
     }
 
-    function get_available_balance_test() public view returns (int256){
+    function get_available_balance_test() public view returns (MinerTypes.GetAvailableBalanceReturn memory){
         MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
 
         MinerTypes.GetAvailableBalanceReturn memory response = minerApiInstance.get_available_balance();
-        return response.available_balance;
+        return response;
     }
 
 
-    function get_vesting_funds_test() public view {
+    function get_vesting_funds_test() public view returns (MinerTypes.GetVestingFundsReturn memory) {
         MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
 
         MinerTypes.GetVestingFundsReturn memory response = minerApiInstance.get_vesting_funds();
+        return response;
     }
 
     function change_beneficiary_test() public {
@@ -59,16 +63,17 @@ contract FilecoinMinerMockTest {
         minerApiInstance.change_beneficiary(params);
     }
 
-    function get_beneficiary_test() public view {
+    function get_beneficiary_test() public view returns (MinerTypes.GetBeneficiaryReturn memory) {
         MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
 
         MinerTypes.GetBeneficiaryReturn memory response = minerApiInstance.get_beneficiary();
+        return response;
     }
 
     function change_owner_address_test() public {
         MinerAPI minerApiInstance = MinerAPI(minerApiAddress);
 
-        bytes memory addr = bytes("0x1111");
+        string memory addr = "t01113";
         minerApiInstance.change_owner_address(addr);
     }
 }
