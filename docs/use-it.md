@@ -1,6 +1,6 @@
 ---
 title: How to use it on my project?
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 In order to use these APIs in your project, you will need to deploy them first. As they are contracts themselves, they need to be present on the chain first. Then, using the address you get from deploying them,
