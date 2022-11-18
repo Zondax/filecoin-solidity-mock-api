@@ -4,7 +4,7 @@ pragma solidity >=0.4.25 <= 0.8.15;
 import "./typeLibraries/MarketTypes.sol";
 
 contract MarketAPI{
-    mapping(bytes => uint256) balances;
+    mapping(string => uint256) balances;
 
     function add_balance(MarketTypes.AddBalanceParams memory params) public payable {
         balances[params.provider_or_client] += msg.value;
@@ -14,7 +14,7 @@ contract MarketAPI{
         return MarketTypes.WithdrawBalanceReturn(1);
     }
 
-    function get_balance(bytes memory addr) public view returns (MarketTypes.GetBalanceReturn memory) {
+    function get_balance(string memory addr) public view returns (MarketTypes.GetBalanceReturn memory) {
         uint256 actualBalance = balances[addr];
 
         return MarketTypes.GetBalanceReturn(actualBalance, 0);
