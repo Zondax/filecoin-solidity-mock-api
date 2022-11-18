@@ -6,3 +6,4 @@
 !**/bin/.gitkeep
 **/target/
 **/build
+node_modules/
